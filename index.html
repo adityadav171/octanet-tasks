@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Landing Page</title>
+   
+</head>
+
+<style>
+    /* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5em;
+}
+
+.nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.nav-links li {
+    margin-left: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+}
+
+.menu-icon {
+    display: none;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+.hero {
+    background: url('hero-image.jpg') no-repeat center center/cover;
+    color: white;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.cta {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.services, .about, .contact {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.service-item {
+    margin-bottom: 20px;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .nav-links {
+        flex-direction: column;
+        display: none;
+    }
+
+    .menu-icon {
+        display: block;
+    }
+
+    .nav-links.show {
+        display: flex;
+    }
+}
+
+@media (max-width: 600px) {
+    .hero {
+        padding: 0 20px;
+    }
+
+    .services, .about, .contact {
+        padding: 40px 20px;
+    }
+}
+
+</style>
+<body>
+    <header>
+        <nav>
+            <div class="logo">MySite</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="menu-icon">&#9776;</div>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <h1>Welcome to MySite</h1>
+        <p>Your one-stop solution for web development</p>
+        <a href="#services" class="cta">Learn More</a>
+    </section>
+
+    <section id="services" class="services">
+        <h2>Our Services</h2>
+        <div class="service-item">
+            <h3>Web Development</h3>
+            <p>Building responsive and dynamic websites.</p>
+        </div>
+        <div class="service-item">
+            <h3>SEO Optimization</h3>
+            <p>Improving your website's search engine ranking.</p>
+        </div>
+        <div class="service-item">
+            <h3>Content Creation</h3>
+            <p>Creating engaging content for your audience.</p>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <h2>About Us</h2>
+        <p>We are a team of experienced web developers dedicated to delivering high-quality web solutions.</p>
+    </section>
+
+    <section id="contact" class="contact">
+        <h2>Contact Us</h2>
+        <form>
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 MySite. All Rights Reserved.</p>
+    </footer>
+    
+    <script src="script.js"></script>
+</body>
+</html>
