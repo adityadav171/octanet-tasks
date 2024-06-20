@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<script>
+    document.getElementById('task-form').addEventListener('submit', addTask);
+
+function addTask(e) {
+    e.preventDefault();
+
+    const taskName = document.getElementById('task-name').value;
+    const taskDate = document.getElementById('task-date').value;
+    const taskPriority = document.getElementById('task-priority').value;
+    const taskCategory = document.getElementById('task-category').value;
+
+    const task = {
+        name: taskName,
+        date: taskDate,
+        priority: taskPriority,
+        category: taskCategory,
+        completed: false
+    };
+
+    addTaskToDOM(task);
+    saveTask(task);
+}
+
+function addTaskToDOM(task) {
+    const taskList = document.getElementById('task-list');
+
+    const li = document.createElement('li');
+    li.innerHTML = `
+        <span>${task.name} - ${task.date} - ${task.priority} - ${task.category}</span>
+        <div class="actions">
+            <button onclick="toggleComplete(this)">Complete</button>
+            <button onclick="deleteTask(this)">Delete</button>
+        </div>
+    `;
+
+    taskList.appendChild(li);
+}
+
+function saveTask(task) {
+    let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    tasks.push(task);
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+
+function toggleComplete(button) {
+    const li = button.parentElement.parentElement;
+    li.classList.toggle('completed');
+}
+
+function deleteTask(button) {
+    const li = button.parentElement.parentElement;
+    li.remove();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    tasks.forEach(task => addTaskToDOM(task));
+});
+
+</script>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+
+h1 {
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input, select, button {
+    margin: 5px 0;
+    padding: 10px;
+    font-size: 16px;
+}
+
+button {
+    background: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    background: #f9f9f9;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+li.completed {
+    text-decoration: line-through;
+    background: #e0e0e0;
+}
+
+li .actions {
+    display: flex;
+    gap: 10px;
+}
+
+li .actions button {
+    padding: 5px;
+    font-size: 14px;
+}
+
+</style>
+<body>
+    <div class="container">
+        <h1>To-Do List</h1>
+        <form id="task-form">
+            <input type="text" id="task-name" placeholder="Task name" required>
+            <input type="date" id="task-date" required>
+            <select id="task-priority">
+                <option value="High">High</option>
+                <option value="Medium">Medium</option>
+                <option value="Low">Low</option>
+            </select>
+            <select id="task-category">
+                <option value="Work">Work</option>
+                <option value="Personal">Personal</option>
+                <option value="Others">Others</option>
+            </select>
+            <button type="submit">Add Task</button>
+        </form>
+        <ul id="task-list"></ul>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
